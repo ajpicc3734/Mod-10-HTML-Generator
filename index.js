@@ -1,6 +1,10 @@
 const fs = require("fs");
 const inquirer = require("inquirer");
 
+const Manager = require("./lib/Manager");
+const Engineer = require("./lib/Engineer");
+const Intern = require("./lib/Intern");
+
 const generate = require("./src/template");
 
 const employees = [];
@@ -25,14 +29,20 @@ const managerQuestions = () => {
       },
       {
         type: "input",
-        name: "ManagerOffice",
+        name: "managerOffice",
         message: "What is the manager's office number?",
       },
     ])
     .then((answers) => {
-      employees.push(answers);
+      const manager = new Manager(
+        answers.managerName,
+        answers.managerId,
+        answers.managerEmail,
+        answers.managerOffice
+      );
+      employees.push(manager);
+      console.log(employees);
       addNewEmployee();
-      generatePage();
     });
 };
 
@@ -46,8 +56,8 @@ const addNewEmployee = () => {
         choices: ["Engineer", "Intern", "No"],
       },
     ])
-    .then((newEmployee = parseInt(newEmployee)) => {
-      switch (newEmployee) {
+    .then((userChoice) => {
+      switch (userChoice.confirmAddEmployee) {
         case "Engineer":
           engineerQuestions();
           break;
@@ -86,7 +96,15 @@ const engineerQuestions = () => {
       },
     ])
     .then((answers) => {
-      employees.push(answers);
+      const engineer = new Engineer(
+        answers.engineerName,
+        answers.engineerId,
+        answers.engineerEmail,
+        answers.engineerGitHub
+      );
+      employees.push(engineer);
+      console.log(employees);
+      addNewEmployee();
     });
 };
 
@@ -115,7 +133,14 @@ const internQuestions = () => {
       },
     ])
     .then((answers) => {
-      employees.push(answers);
+      const intern = new Intern(
+        answers.internName,
+        answers.internId,
+        answers.internEmail,
+        answers.school
+      );
+      employees.push(intern);
+      addNewEmployee();
     });
 };
 
