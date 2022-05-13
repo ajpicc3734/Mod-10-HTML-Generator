@@ -41,7 +41,6 @@ const managerQuestions = () => {
         answers.managerOffice
       );
       employees.push(manager);
-      console.log(employees);
       addNewEmployee();
     });
 };
@@ -103,7 +102,7 @@ const engineerQuestions = () => {
         answers.engineerGitHub
       );
       employees.push(engineer);
-      console.log(employees);
+
       addNewEmployee();
     });
 };
@@ -153,11 +152,8 @@ managerQuestions();
 //   });
 // };
 
-const generatePage = (employees) => {
-  fs.writeFile("./dist/index.html", generate(employees), (err) => {
-    if (err) throw new Error(err);
-    console.log("Page Created");
-  });
+const generatePage = () => {
+  fs.writeFileSync("./dist/index.html", generate(employees), "utf-8");
 };
 
 // .then(engineerQuestions)
