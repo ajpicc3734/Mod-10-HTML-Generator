@@ -1,0 +1,14 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 2rem
+}
+
+.card {
+    word-wrap: normal;
+}
+
+h1 {
+    text-align: center;
+}
