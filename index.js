@@ -145,18 +145,6 @@ const internQuestions = () => {
 
 managerQuestions();
 
-// const generatePage = (fileName, employees) => {
-//   fs.writeFile(fileName, generatePage(employeeData), (err) => {
-//     if (err) throw new Error(err);
-//     console.log("HTML page created");
-//   });
-// };
-
 const generatePage = () => {
   fs.writeFileSync("./dist/index.html", generate(employees), "utf-8");
 };
-
-// .then(engineerQuestions)
-// .then((getEmployees) => {
-//   console.log(employees);
-// });
